@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "name": "Transaction",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "asset": {
+      "type": "string"
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "nameOfInvestor": {
+      "type": "string"
+    },
+    "amountInvested": {
+      "type": "float"
+    },
+    "plan": {
+      "type": "string"
+    },
+    "maturityDate": {
+      "type": "date"
+    },
+    "payoutCleared": {
+      "type": "boolean"
+    },
+    "transactionId": {
+      "type": "uid"
+    },
+    "investorsWalletAddress": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "integer"
+    },
+    "dailyEarnings": {
+      "type": "float"
+    },
+    "amountToBeAddedDaily": {
+      "type": "float"
+    },
+    "matured": {
+      "type": "boolean"
+    }
+  }
+}

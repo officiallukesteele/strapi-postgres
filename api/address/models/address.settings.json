@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "name": "Address"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "asset": {
+      "type": "string"
+    },
+    "address": {
+      "type": "uid"
+    }
+  }
+}

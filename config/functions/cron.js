@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Cron config that gives you an opportunity
@@ -11,11 +11,55 @@
  */
 
 module.exports = {
-  /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-  // '0 1 * * 1': () => {
-  //
-  // }
+  "*/1 * * * *": () => {
+    function formatDateToUTC(date) {
+      const UTCMseconds =
+        new Date(date).getTime() +
+        new Date(date).getTimezoneOffset() * 60 * 1000;
+      const UTCseconds = Math.round(UTCMseconds / 1000);
+      return UTCseconds;
+    }
+
+    function filterMaturedTransactions(trxns) {
+      try {
+        const currentDate = new Date();
+        const filteredTransactions = trxns.filter(
+          (trxn) =>
+            formatDateToUTC(currentDate) >= formatDateToUTC(trxn.maturityDate)
+        );
+        return filteredTransactions;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    async function setMatured() {
+      const transactions = await strapi
+        .query("transaction")
+        .find({ _limit: -1 });
+      const maturedTransactions = filterMaturedTransactions(transactions);
+      maturedTransactions.forEach((transaction) => {
+        transaction.matured = true;
+        const updateDailyEarnings = strapi
+          .query("transaction")
+          .update({ id: transaction.id }, transaction);
+      });
+      console.log("done");
+    }
+    setMatured();
+  },
+  "*/2 * * * *": async () => {
+    const transactions = await strapi.query("transaction").find({ _limit: -1 });
+    transactions.forEach((transaction, index, transactionArr) => {
+      if (transaction.matured === false) {
+        transaction.dailyEarnings =
+          transaction.dailyEarnings + transaction.amountToBeAddedDaily;
+        const updateDailyEarnings = strapi
+          .query("transaction")
+          .update({ id: transaction.id }, transaction);
+        console.log(updateDailyEarnings);
+      } else {
+        transaction.dailyEarnings = transaction.dailyEarnings + 0;
+      }
+    });
+  },
 };

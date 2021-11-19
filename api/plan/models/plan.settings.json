@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plans",
+  "info": {
+    "name": "Plan",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "float"
+    },
+    "asset": {
+      "type": "string"
+    },
+    "durationInDays": {
+      "type": "integer"
+    },
+    "percentage": {
+      "type": "integer"
+    },
+    "payout": {
+      "type": "float"
+    },
+    "amountToBeAddedDaily": {
+      "type": "float"
+    },
+    "abbreviation": {
+      "type": "string"
+    }
+  }
+}
