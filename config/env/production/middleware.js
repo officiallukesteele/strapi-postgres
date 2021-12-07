@@ -3,6 +3,8 @@ module.exports = {
     logger: {
       level: "error",
     },
+    public: {
+      path: "/data/public",
+    },
   },
 };
-
