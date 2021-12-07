@@ -12,6 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "knex": "<0.20.0",
+    "mailgun-js": "^0.22.0",
     "pg": "^8.3.3",
     "pg-connection-string": "^2.4.0",
     "sqlite3": "latest",
